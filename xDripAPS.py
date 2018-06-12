@@ -76,7 +76,8 @@ class Entries(Resource):
         qry += "unfiltered, rssi, noise "
         qry += "FROM entries ORDER BY date DESC"
         if count != None:
-            qry += " LIMIT " + count
+            if count.isdigit():
+                qry += " LIMIT " + count
 
         results_as_dict = []
 
@@ -84,7 +85,7 @@ class Entries(Resource):
 
         for row in cursor:
             result_as_dict = {
-#		'_id' : row[0],
+#		        '_id' : row[0],
                 'device' : row[1],
                 'date' : row[2],
                 'dateString' : row[3],
